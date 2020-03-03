@@ -112,21 +112,18 @@ $ sudo systemctl restart salt-minion
 ```
 $ sudo salt-key --list-all
 ```
-![listing keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/
-terraform-salt-master-gcp/images/keys-listed-unaccepted.png)
+![listing keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-salt-master-gcp/images/keys-listed-unaccepted.png)
 
 * On the salt-master, accept the key:
 ```
 $ sudo salt-key -A
 ```
-![accepting keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/
-terraform-salt-master-gcp/images/accept-the-minion-key.png)
+![accepting keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-salt-master-gcp/images/accept-the-minion-key.png)
 
 * On the salt-master, apply the state file.
 First, get the minion info (ki-salt-minion-flask-2-5680237f6fc38cab.c.cicd-devops-265916.internal) from the master, and then apply it:
 
-![accepting keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/
-terraform-salt-master-gcp/images/salt-manage-version.png)
+![accepting keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-salt-master-gcp/images/salt-manage-version.png)
 
 ```
 $ sudo salt 'ki-salt-minion-flask-2-5680237f6fc38cab.c.cicd-devops-265916.internal' state.apply demo 
