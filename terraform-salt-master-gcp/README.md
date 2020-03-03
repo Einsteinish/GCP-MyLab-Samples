@@ -124,8 +124,10 @@ terraform-salt-master-gcp/accept-the-minion-key.png)
 
 * On the salt-master, apply the state file.
 First, get the minion info (ki-salt-minion-flask-2-5680237f6fc38cab.c.cicd-devops-265916.internal) from the master, and then apply it:
+
 ![accepting keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/
 terraform-salt-master-gcp/salt-manage-version.png)
+
 ```
 $ sudo salt 'ki-salt-minion-flask-2-5680237f6fc38cab.c.cicd-devops-265916.internal' state.apply demo 
 ```
