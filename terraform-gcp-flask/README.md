@@ -2,7 +2,7 @@
 
 This repo will deploy a sample Flask app on your local machine to GCP instance via Terraform.
 
-![Output](https://github.com/Einsteinish/GCP-MyLab-Samples/tree/master/terraform-gcp-flask/flask-terraform.png)
+![Output](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-gcp-flask/flask-terraform.png)
 
 ## Getting Started
 
