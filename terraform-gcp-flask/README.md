@@ -37,7 +37,6 @@ Copy a Flask app from local to the GCP vm using Terraform's file provisioner
        "sudo apt-get update",
        "sudo apt-get install -yq build-essential python-pip",
        "sudo pip -q install flask",
-       //"sudo pip -q install ansible",
        // This app can also be run ansible playbook via local-exec 
        "nohup python flask-teraform.py &",
        // sleep prevents remote-exec from Terraform getting away with shutting down 
