@@ -12,7 +12,7 @@ resource "random_id" "instance_id" {
 
 // A single Google Cloud Engine instance
 resource "google_compute_instance" "default" {
-  name         = "ki-salt-minion-flask-2-${random_id.instance_id.hex}"
+  name         = "ki-salt-minion-flask-${random_id.instance_id.hex}"
   machine_type = "f1-micro"
   //machine_type = "n1-standard-1"
   zone         = "us-west2-a"
@@ -61,7 +61,7 @@ resource "google_compute_instance" "default" {
 }
 
 resource "google_compute_firewall" "default" {
-  name    = "ki-salt-minion-flask-firewall-2"
+  name    = "ki-salt-minion-flask-firewall"
   network = "default"
 
   allow {

@@ -122,7 +122,7 @@ resource "google_compute_instance" "default" {
 }
 
 resource "google_compute_firewall" "default" {
-  name    = "ki-salt-master-firewall-2"
+  name    = "ki-salt-master-firewall"
   network = "default"
 
   allow {
