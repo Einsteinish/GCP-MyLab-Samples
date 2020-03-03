@@ -14,7 +14,7 @@ resource "random_id" "instance_id" {
 resource "google_compute_instance" "default" {
   name         = "ki-flask-vm-${random_id.instance_id.hex}"
   machine_type = "f1-micro"
-  zone         = "us-west1-a"
+  zone         = "us-west2-a"
 
   boot_disk {
     initialize_params {

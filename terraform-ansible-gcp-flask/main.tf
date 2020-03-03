@@ -14,7 +14,7 @@ resource "random_id" "instance_id" {
 resource "google_compute_instance" "default" {
   name         = "ki-flask-vm-${random_id.instance_id.hex}"
   machine_type = "f1-micro"
-  zone         = "us-west1-a"
+  zone         = "us-west2-a"
 
   boot_disk {
     initialize_params {
@@ -69,8 +69,6 @@ resource "google_compute_instance" "default" {
     ]
   }
   provisioner "local-exec" {
-    //command  = "sleep 30; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -v -i '${self.public_ip},' --key-file ../terr.pem ./ansible/config.yml -e 'ansible_python_interpreter=/usr/bin/python3'"
-    // command  = "sleep 10; ansible-playbook -v -i self.network_interface.0.access_config.0.nat_ip,' --key-file ~/.ssh/my-gcp-key.json ./ansible/config.yml"
     command  = "sleep 10; ansible-playbook ./ansible/play.yml -v -i '${self.network_interface.0.access_config.0.nat_ip},' -u ki_hong"
   }
 }

@@ -15,7 +15,7 @@ resource "google_compute_instance" "default" {
   name         = "ki-salt-minion-flask-2-${random_id.instance_id.hex}"
   machine_type = "f1-micro"
   //machine_type = "n1-standard-1"
-  zone         = "us-west1-a"
+  zone         = "us-west2-a"
 
   boot_disk {
     initialize_params {
