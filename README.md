@@ -22,7 +22,3 @@ Provision and configure a flask app on the desktop
 * terraform-salt-master-gcp - provision/configure a salt master via terraform. The salt state copies the app to minion and runs it
 * terraform-salt-minion-flask-gcp - provision/configure a salt minion on which the flask app runs
 
-
-### Info
-
-"Ki Hong" <ki.hong@247.ai>
