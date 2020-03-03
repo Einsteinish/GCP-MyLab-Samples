@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  become_user: ki_hong
+  tasks:     
+  - name: Running python app
+    become: yes
+    become_user: ki_hong
+    shell: nohup python flask-terraform-ansible.py &
