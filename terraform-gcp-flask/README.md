@@ -15,6 +15,11 @@ Terraform 12
 * terraform init
 * terraform plan
 * terraform apply
+* terraform taint resource resource_name (google_compute_instance.default) 
+
+### Provision
+* google_compute_instance
+* google_compute_firewall (port 80/5000)
 
 ### Configuration
 
