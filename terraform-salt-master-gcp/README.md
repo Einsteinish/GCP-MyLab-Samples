@@ -24,54 +24,90 @@ Ansible
 
 ### Provision
 * google_compute_instance
-* google_compute_firewall (port 80/5000)
+* google_compute_firewall (salt-minion: port 22/80/5000) (salt-master: 22/4505/4506)
 
 ### Configuration
 Copy a Flask app from local to the GCP vm using Terraform's file provisioner
 
 ```
+  // copy an app file from local to salt master
   provisioner "file" {
-    # Copies the file using SSH
-    source = "./flask-teraform.py"
-    destination = "~/flask-teraform.py"
+    // Copies the file using SSH
+    source = "./${var.app_name}"
+    destination = "/home/ki_hong/${var.app_name}"
   }
 ```
 
-* Installs python-pip and Flask using a Terraform's remote-exec provisioner. Then runs the app in background.
+* Configs salt-master using a Terraform's remote-exec provisioner. Then creates salt state files. Running the app on minion is done via salt's cmd.run
 
 ```
   provisioner "remote-exec" {
     // a list of command strings and they are executed in the order 
     inline = [
-       "sudo apt-get update",
-       "sudo apt-get install -yq build-essential python-pip",
-       "sudo pip -q install flask",
-       // This app can also be run ansible playbook via local-exec 
-       "nohup python flask-teraform.py &",
-       // sleep prevents remote-exec from Terraform getting away with shutting down 
-       // the connection before the child process has a chance to start up, despite the nohup.
-       "sleep 10",
+      // create a /srv/salt directory for app 
+      // and state dir /srv/salt/demo
+      "sudo mkdir -p /srv/salt/demo",
+       
+      // create a directory for configure base and fileserver_backend
+      "sudo mkdir -p /etc/salt/master.d",
+
+      // copying the app file to /srv/salt where state directory is located
+      "sudo cp /home/ki_hong/${var.app_name} /srv/salt/.",
+
+      "sleep 2",
+
+      // writing salt state files in demo directory
+      "sudo bash -c 'cat << EOF > /srv/salt/demo/app.sls",
+      "app-state:",
+      " cmd.run:",
+      "   - name: /usr/bin/python /home/ki_hong/${var.app_name} &",
+      "EOF'",
+
+      "cat << EOF | sudo tee -a /srv/salt/demo/demo.sls",
+      "demo-state:",
+      " file.managed:",
+      "   - source: salt://${var.app_name}",
+      "   - name: /home/ki_hong/${var.app_name}",
+      "   - user: ki_hong",
+      "   - group: root",
+      "   - mode: 777",
+      "EOF",
+
+      "sudo bash -c 'cat << EOF > /srv/salt/demo/init.sls",
+      "include:",
+      " - .demo",
+      " - .app", 
+      "EOF'",
+
+
+      // configure base env and fileserver_backend
+      "sudo bash -c 'cat << EOF > /etc/salt/master.d/myconf.conf",
+      "base:",
+      " - /srv/salt",
+      "fileserver_backend:",
+      " - roots",
+      "EOF'",    
+
+      // restart the salt-master
+      "sudo systemctl restart salt-master",
     ]
   }
 ```
 
-* Runs the app via local-exec provisioner using a playbook (play.yml)
+### Steps
+
+* Minion - how to set master: 
+add master's ip to /etc/salt/minion:
 ```
-  provisioner "local-exec" {
-    command  = "sleep 10; ansible-playbook ./ansible/play.yml -v -i '${self.network_interface.0.access_config.0.nat_ip},' -u ki_hong"
-  }
+master: 10.138.15.201
 ```
 
-where play.yml looks like this:
+* Then, restart salt-minion:
+```
+$ sudo systemctl restart salt-minion
+```
 
-```
----
-- hosts: all
-  become: yes
-  become_user: ki_hong
-  tasks:     
-  - name: Running python app
-    become: yes
-    become_user: ki_hong
-    shell: nohup python flask-terraform-ansible.py &
-```
+* On the salt-master, list the keys:
+$ sudo salt-key --list-all
+
+
