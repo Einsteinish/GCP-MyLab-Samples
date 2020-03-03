@@ -50,8 +50,8 @@ resource "google_compute_instance" "default" {
 
   provisioner "file" {
     # Copies the file using SSH
-    source = "./flask-teraform.py"
-    destination = "~/flask-teraform.py"
+    source = "./${var.app_name}"
+    destination = "~/${var.app_name}"
   }
 
   provisioner "remote-exec" {

@@ -15,3 +15,8 @@ variable "zones_map" {
     "us-west2-b" = 2
   }
 }
+
+variable "app_name" {
+  default     = "flask-teraform.py"
+  description = "The name of the app"
+}
