@@ -10,6 +10,7 @@ Provision and configure a flask app on the desktop
 ### Prerequisites
 
 * GCP account (google key shoule be stored in ~/.ssh/my-gcp-key.json)
+* Public ssh key (~/.ssh/id_rsa.pub)
 * Terraform 12 
 * Ansible (if you want to use Ansible)
 
