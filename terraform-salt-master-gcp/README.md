@@ -94,7 +94,8 @@ Copy a Flask app from local to the GCP vm using Terraform's file provisioner
   }
 ```
 
-### Steps
+### Steps 
+(This is the quick and dirty steps not intending to replace any official salt docs or salt experts's opinion)
 
 * Minion - how to set master: 
 add master's ip to /etc/salt/minion:
@@ -108,6 +109,25 @@ $ sudo systemctl restart salt-minion
 ```
 
 * On the salt-master, list the keys:
+```
 $ sudo salt-key --list-all
+```
+![listing keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/
+terraform-salt-master-gcp/keys-listed-unaccepted.png)
+
+* On the salt-master, accept the key:
+```
+$ sudo salt-key -A
+```
+![accepting keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/
+terraform-salt-master-gcp/accept-the-minion-key.png)
+
+* On the salt-master, apply the state file.
+First, get the minion info (ki-salt-minion-flask-2-5680237f6fc38cab.c.cicd-devops-265916.internal) from the master, and then apply it:
+![accepting keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/
+terraform-salt-master-gcp/salt-manage-version.png)
+```
+$ sudo salt 'ki-salt-minion-flask-2-5680237f6fc38cab.c.cicd-devops-265916.internal' state.apply demo 
+```
 
 
