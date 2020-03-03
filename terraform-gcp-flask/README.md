@@ -11,75 +11,41 @@ These instructions will let you know how to provision and configure via Terrafor
 
 Terraform 12 
 
+### Terraform run
+* terraform init
+* terraform plan
+* terraform apply
 
-### Installing
+### Configuration
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+Copy a Flask app from local to the GCP vm using Terraform's file provisioner
 
 ```
-until finished
+  provisioner "file" {
+    # Copies the file using SSH
+    source = "./flask-teraform.py"
+    destination = "~/flask-teraform.py"
+  }
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+* Installs python-pip and Flask using a Terraform's remote-exec provisioner. Then runs the app in background.
 
 ```
-Give an example
+  provisioner "remote-exec" {
+    // a list of command strings and they are executed in the order 
+    inline = [
+       "sudo apt-get update",
+       "sudo apt-get install -yq build-essential python-pip",
+       "sudo pip -q install flask",
+       //"sudo pip -q install ansible",
+       // This app can also be run ansible playbook via local-exec 
+       "nohup python flask-teraform.py &",
+       // sleep prevents remote-exec from Terraform getting away with shutting down 
+       // the connection before the child process has a chance to start up, despite the nohup.
+       "sleep 10",
+    ]
+  }
 ```
 
-### And coding style tests
 
-Explain what these tests test and why
 
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
