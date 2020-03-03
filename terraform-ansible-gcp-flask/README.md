@@ -27,7 +27,6 @@ Ansible
 * google_compute_firewall (port 80/5000)
 
 ### Configuration
-
 Copy a Flask app from local to the GCP vm using Terraform's file provisioner
 
 ```
@@ -77,3 +76,6 @@ where play.yml looks like this:
     shell: nohup python flask-terraform-ansible.py &
 ```
 
+### Note
+It appears to be there is some latency between local to central region. There is a Tarraform process that copies a file from local to a GCP vm, it timed out. So, we may want to use GCP bucket instead of copying directly from local to the vm.
+In the code, the west2 (LA) is used.
