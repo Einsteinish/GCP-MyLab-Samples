@@ -4,11 +4,14 @@ GCP samples - How to use Terraform (Provision & Configuration) with Ansible and 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Detailed instructions can be found in each project's README.
+Provision and configure a flask app on the desktop
 
 ### Prerequisites
 
-GCP account and terraform 12 
+* GCP account (google key shoule be stored in ~/.ssh/my-gcp-key.json)
+* Terraform 12 
+* Ansible (if you want to use Ansible)
 
 
 ### Repos
