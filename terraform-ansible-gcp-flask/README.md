@@ -9,12 +9,12 @@ This repo will configure GCP instance via Terraform and deploy a sample Flask ap
 
 ## Getting Started
 
-These instructions will let you know how to provision and configure via Terraform. No additional configuration tools is not needed.
-
+These instructions will let you know how to provision via Terraform and configure via Ansible. 
 
 ### Prerequisites
 
 Terraform 12 
+Ansible
 
 ### Terraform run
 * terraform init
@@ -54,5 +54,26 @@ Copy a Flask app from local to the GCP vm using Terraform's file provisioner
        "sleep 10",
     ]
   }
+```
+
+* Runs the app via local-exec provisioner using a playbook (play.yml)
+```
+  provisioner "local-exec" {
+    command  = "sleep 10; ansible-playbook ./ansible/play.yml -v -i '${self.network_interface.0.access_config.0.nat_ip},' -u ki_hong"
+  }
+```
+
+where play.yml looks like this:
+
+```
+---
+- hosts: all
+  become: yes
+  become_user: ki_hong
+  tasks:     
+  - name: Running python app
+    become: yes
+    become_user: ki_hong
+    shell: nohup python flask-terraform-ansible.py &
 ```
 
