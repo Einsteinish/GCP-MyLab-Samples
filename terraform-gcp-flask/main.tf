@@ -54,13 +54,12 @@ resource "google_compute_instance" "default" {
     destination = "~/flask-teraform.py"
   }
 
-provisioner "remote-exec" {
+  provisioner "remote-exec" {
     // a list of command strings and they are executed in the order 
     inline = [
        "sudo apt-get update",
        "sudo apt-get install -yq build-essential python-pip",
        "sudo pip -q install flask",
-       //"sudo pip -q install ansible",
        // This app can also be run ansible playbook via local-exec 
        "nohup python flask-teraform.py &",
        // sleep prevents remote-exec from Terraform getting away with shutting down 
