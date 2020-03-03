@@ -1,11 +1,19 @@
-# GCP-Lab
-Files from the GCP training lab. This is just a simple example of creating a module for a single GCP project.  It is also not fully functional, please do not just copy/paste this when building your own, it is for refrence only.
+# GCP-MyLab-Samples
 
-* **main.tf** - This file just calls the module in the subdirectory.  It is the module that does all the real work.
+GCP samples - How to use Terraform (Provision & Configuration) with Ansible and Salt to deploy a Flask app
 
-* **terraform-gcp-compute/main.tf** - This file has the provider information, the credientials and the bulk of the infrastucture definitions.  
+## Getting Started
 
-* **terraform-gcp-compute/output.tf** - This file provides various outputs so that a human can get useful feedback.  Right now it is set to provide network data, but it can provide a lot more information.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-* **terraform-gcp-compute/variables.tf** - This file is where you will define the variables that are called in the main.tf file.  This allows for a single location to change configs while leaving the rest of the terraform files untouched.
-  * In this example we use variables for the number of instances in total, the zones and the number of instances in each zone.
+### Prerequisites
+
+GCP account and terraform 12 
+
+
+### Repos
+
+* terraform-gcp-flask - provision an instace via terraform and deploy the flask app via terraform
+* terraform-ansible-gcp-flask - provision an instace via terraform and deploy the flask app via ansible
+* terraform-salt-master-gcp - provision/configure a salt master via terraform. The salt state copies the app to minion and runs it
+* terraform-salt-minion-flask-gcp - provision/configure a salt minion on which the flask app runs
