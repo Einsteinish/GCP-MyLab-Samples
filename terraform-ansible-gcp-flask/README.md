@@ -13,7 +13,8 @@ These instructions will let you know how to provision via Terraform and configur
 
 ### Prerequisites
 
-Terraform 12 
+Terraform 12
+
 Ansible
 
 ### Terraform run
