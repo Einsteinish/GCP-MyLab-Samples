@@ -146,3 +146,8 @@ include:
 ```
 So, it ends up running the two state files.
 
+* On the salt-minion, we can check the flask is running:
+```
+[ki_hong@ki-salt-minion-flask-5680237f6fc38cab ~]$ ps aux | grep -i flask
+root     12185  0.0  3.0 568100 18036 ?        Sl   00:15   0:03 /usr/bin/python /home/ki_hong/flask-terraform-salt.py
+```
