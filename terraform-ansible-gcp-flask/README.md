@@ -38,7 +38,7 @@ Copy a Flask app from local to the GCP vm using Terraform's file provisioner
   }
 ```
 
-* Installs python-pip and Flask using a Terraform's remote-exec provisioner. Then runs the app in background.
+* Installs python-pip and Flask using a Terraform's remote-exec provisioner. 
 
 ```
   provisioner "remote-exec" {
@@ -63,7 +63,7 @@ Copy a Flask app from local to the GCP vm using Terraform's file provisioner
   }
 ```
 
-where play.yml looks like this:
+where the play.yml looks like this:
 
 ```
 ---
