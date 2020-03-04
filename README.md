@@ -1,4 +1,4 @@
-# GCP-MyLab-Samples
+# GCP-Terraform-Salt-Samples
 
 GCP samples - How to use Terraform (Provision & Configuration) with Salt or Ansible to deploy a Flask app
 
