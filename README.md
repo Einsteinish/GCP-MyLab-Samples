@@ -23,4 +23,5 @@ Provision and configure a flask app on the desktop
 * terraform-salt-minion-flask-gcp - provision/configure a salt minion on which the flask app runs
 
 ### Note
-It appears to be there is some latency between local(San Jose) to central region. There is a Tarraform process that copies a file from local to a GCP vm, it timed out. So, we may want to use GCP bucket instead of copying directly from local to the vm. In the code, the west2 (LA) is used.
+* It appears to be there is some latency between local(San Jose) to central region. There is a Tarraform process that copies a file from local to a GCP vm, it timed out. So, we may want to use GCP bucket instead of copying directly from local to the vm. In the code, the west2 (LA) is used.
+* These samples are not intended to be the best practices of Terraform.
