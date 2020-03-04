@@ -1,6 +1,6 @@
 # Deploy a Flask app via Salt-master
 
-This repo will configure Sal-master instance via Terraform and deploy a sample Flask app from salt-master to salt-minion via salt.
+This repo will configure Salt-master instance via Terraform and deploy a sample Flask app from salt-master to salt-minion by  applying salt state.
 
 
 ![Output](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-salt-master-gcp/images/salt-output.png)
@@ -94,7 +94,7 @@ Copy a Flask app from local to the GCP vm using Terraform's file provisioner
 ```
 
 ### Steps 
-(This is the quick and dirty steps not intending to replace any official salt docs or salt experts's opinion)
+(These are the quick and dirty steps not intending to replace any official salt docs or salt experts's opinion)
 
 * Minion - how to set master: 
 add master's ip to /etc/salt/minion:
@@ -151,3 +151,5 @@ So, it ends up running the two state files.
 [ki_hong@ki-salt-minion-flask-5680237f6fc38cab ~]$ ps aux | grep -i flask
 root     12185  0.0  3.0 568100 18036 ?        Sl   00:15   0:03 /usr/bin/python /home/ki_hong/flask-terraform-salt.py
 ```
+
+* You saw the creen shot of the Flask app running on minion at the top of this README page.
