@@ -3,8 +3,7 @@
 This repo will configure Sal-master instance via Terraform and deploy a sample Flask app from salt-master to salt-minion via salt.
 
 
-![Output](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-salt-master-gcp/images/terraform-salt-flask.png)
-
+![Output](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-salt-master-gcp/images/salt-output.png)
 
 
 ## Getting Started
