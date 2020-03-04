@@ -9,11 +9,10 @@ This repo will deploy a sample Flask app from your local machine to GCP instance
 
 ## Getting Started
 
-These instructions will let you know how to provision and configure via Terraform. No additional configuration tools is not needed.
+These instructions will let you know how to provision and configure via Terraform. No additional configuration tool is not needed.
 
 
 ### Prerequisites
-
 Terraform 12 
 
 ### Terraform run
