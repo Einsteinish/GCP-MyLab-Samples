@@ -3,7 +3,7 @@
 This repo will configure Sal-master instance via Terraform and deploy a sample Flask app from salt-master to salt-minion via salt.
 
 
-![Output](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-ansible-gcp-flask/images/terraform-ansible-flask.png)
+![Output](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-salt-master-gcp/images/terraform-salt-flask.png)
 
 
 
@@ -126,7 +126,24 @@ First, get the minion info (ki-salt-minion-flask-2-5680237f6fc38cab.c.cicd-devop
 ![accepting keys](https://github.com/Einsteinish/GCP-MyLab-Samples/blob/master/terraform-salt-master-gcp/images/salt-manage-version.png)
 
 ```
-$ sudo salt 'ki-salt-minion-flask-2-5680237f6fc38cab.c.cicd-devops-265916.internal' state.apply demo 
+$ sudo salt 'ki-salt-minion-flask-5680237f6fc38cab.c.cicd-devops-265916.internal' state.apply demo 
 ```
 
+* The demo directory has the following state files:
+```
+$ tree /srv/salt/demo
+/srv/salt/demo
+├── app.sls
+├── demo.sls
+└── init.sls
+```
+
+* By applying the demo folder, salt will run init.sls that looks like this:
+```
+[ki_hong@ki-salt-master-2d20cc91d8368e79 demo]$ cat init.sls
+include:
+ - .demo
+ - .app
+```
+So, it ends up running the two state files.
 
